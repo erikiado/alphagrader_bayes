@@ -2,14 +2,22 @@ import fileinput
 import json
 import re
 
-
-# class BayesNet(object):
-
-#     def __init__(self):
-#         self.nodes = {}
-    # bayes = BayesNet()
-    # lines = list(map(lambda x: x.strip(), lines))
-
+def calculate_network():
+    # for query in qs:
+    #     if '|' in query:
+    #         prior, cond = query.split('|')
+    #         if query in net[prior[1:]].keys():
+    #             answers.append(net[prior[1:]][query])
+    #         else:
+    #             answers.append('falta calcular')            
+    #     else:
+    #         if query in net[query[1:]].keys():
+    #             answers.append(net[query[1:]][query])
+    #         else:
+    #             answers.append('falta calcular')            
+    
+    
+    pass
 
 def read_input():
     step = 0
@@ -51,7 +59,7 @@ def read_input():
                             net[c[1:]]['childs'].append(prior[1:])
                     # Save probability of event
                     net[prior[1:]][ (prior + '|' + ','.join(conds)) ] = prob
-                    
+
                 # Else probability is indepent, hence a root. Also calculate inverse probability
                 # on the tables of each node
                 else:
@@ -73,21 +81,10 @@ def main():
 
     net, qs, roots = read_input()
 
-    print(json.dumps(net,indent=2))    
+    calculate_network()
+
     print(roots)    
-    # for query in qs:
-    #     if '|' in query:
-    #         prior, cond = query.split('|')
-    #         if query in net[prior[1:]].keys():
-    #             answers.append(net[prior[1:]][query])
-    #         else:
-    #             answers.append('falta calcular')            
-    #     else:
-    #         if query in net[query[1:]].keys():
-    #             answers.append(net[query[1:]][query])
-    #         else:
-    #             answers.append('falta calcular')            
-    
+    print(json.dumps(net,indent=2))    
     for a in answers: print(a)
 
 
