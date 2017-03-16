@@ -2,22 +2,6 @@ import fileinput
 import json
 import re
 
-def calculate_network():
-    # for query in qs:
-    #     if '|' in query:
-    #         prior, cond = query.split('|')
-    #         if query in net[prior[1:]].keys():
-    #             answers.append(net[prior[1:]][query])
-    #         else:
-    #             answers.append('falta calcular')            
-    #     else:
-    #         if query in net[query[1:]].keys():
-    #             answers.append(net[query[1:]][query])
-    #         else:
-    #             answers.append('falta calcular')            
-    
-    
-    pass
 
 def read_input():
     step = 0
@@ -75,16 +59,37 @@ def read_input():
                 queries.append(line.strip())
     return net, queries, roots 
 
+def calculate_network(): 
+    pass
+
+def answer_queries(net,qs):
+    answers = []
+    for query in qs:
+        if '|' in query:
+            prior, cond = query.split('|')
+            if query in net[prior[1:]].keys():
+                answers.append(net[prior[1:]][query])
+            else:
+                answers.append('falta calcular')            
+        else:
+            if query in net[query[1:]].keys():
+                answers.append(net[query[1:]][query])
+            else:
+                answers.append('falta calcular')            
+   return answers
+
 
 def main():
-    answers = []
 
     net, qs, roots = read_input()
 
-    calculate_network()
+    calculate_network(net,roots)
+
+    answers = answer_queries(net,qs)
 
     print(roots)    
     print(json.dumps(net,indent=2))    
+    
     for a in answers: print(a)
 
 
